@@ -42,9 +42,9 @@ func (m *DurationFlag) Set(value string) error {
 }
 
 func init() {
-	flag.StringVar(&FlagAddr, "mpi-addr", "", "address of the local running process")
-	flag.Var(&FlagAllAddrs, "mpi-alladdr", "addresses of all of the processes as comma separated values")
-	flag.Var(&FlagInitTimeout, "mpi-inittimeout", "duration to wait before timeout in init")
-	flag.StringVar(&FlagProtocol, "mpi-protocol", "tcp", "communication protocol to use")
-	flag.StringVar(&FlagPassword, "mpi-password", "", "value to use for salting the mpi connection")
+	flag.StringVar(&FlagAddr, "-mpi-addr", "", "address of the local running process")
+	flag.Var(&FlagAllAddrs, "-mpi-alladdr", "addresses of all of the processes as comma separated values")
+	flag.Var(&FlagInitTimeout, "-mpi-inittimeout", "duration to wait before timeout in init")
+	flag.StringVar(&FlagProtocol, "-mpi-protocol", "tcp", "communication protocol to use")
+	flag.StringVar(&FlagPassword, "-mpi-password", "", "value to use for salting the mpi connection")
 }

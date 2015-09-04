@@ -43,7 +43,7 @@ func main() {
 	otherArgs := os.Args[3:]
 
 	// Use local host ports
-	baseport := 5000
+	baseport := 6000
 	var ports []string
 	for i := 0; i < nNodes; i++ {
 		portName := ":" + strconv.Itoa(baseport+i)
@@ -74,7 +74,7 @@ func launch(execName string, ports []string, args []string) {
 			for _, v := range args {
 				a = append(a, v)
 			}
-			a = append(a, "-mpi-addr", port, "-mpi-alladdr", portlist)
+			a = append(a, "--mpi-addr", port, "--mpi-alladdr", portlist)
 			cmd := exec.Command(execName, a...)
 			cmd.Stdin = os.Stdin
 			cmd.Stdout = os.Stdout
