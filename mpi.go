@@ -77,8 +77,8 @@ type Raw []byte
 // Init initializes the communication network. Init must be called before any
 // other functions are called, and should only be called once during program
 // execution
-func Init() error {
-	return mpier.Init()
+func Init(input Input) error {
+	return mpier.Init(input)
 }
 
 // Finalize cleans up the commication network. After a call to finalize, no more
@@ -145,7 +145,7 @@ func Receive(data interface{}, source, tag int) error {
 // Mpi is a set of routines for performing parallel computation. See the
 // function descriptions for documentation.
 type Interface interface {
-	Init() error
+	Init(input Input) error
 	Finalize()
 	Rank() int
 	Size() int

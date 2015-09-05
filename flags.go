@@ -1,22 +1,33 @@
 package mpi
 
 import (
-	"flag"
 	"fmt"
 	"strings"
 	"time"
 )
 
-var FlagAddr string
-var FlagAllAddrs AddrsFlag
-var FlagInitTimeout DurationFlag
-var FlagProtocol string
-var FlagPassword string
+//var FlagAddr string
+//var FlagAllAddrs AddrsFlag
+//var FlagInitTimeout DurationFlag
+//var FlagProtocol string
+//var FlagPassword string
+
+type Input struct {
+	FlagAddr        string
+	FlagAllAddrs    AddrsFlag
+	FlagInitTimeout DurationFlag
+	FlagProtocol    string
+	FlagPassword    string
+}
 
 type AddrsFlag []string
 
 func (m *AddrsFlag) String() string {
 	return fmt.Sprint(*m)
+}
+
+func (m AddrsFlag) Type() string {
+	return "slice"
 }
 
 func (m *AddrsFlag) Set(value string) error {
@@ -27,6 +38,10 @@ func (m *AddrsFlag) Set(value string) error {
 }
 
 type DurationFlag time.Duration
+
+func (m DurationFlag) Type() string {
+	return "duration"
+}
 
 func (m *DurationFlag) String() string {
 	return time.Duration(*m).String()
@@ -41,10 +56,10 @@ func (m *DurationFlag) Set(value string) error {
 	return nil
 }
 
-func init() {
-	flag.StringVar(&FlagAddr, "-mpi-addr", "", "address of the local running process")
-	flag.Var(&FlagAllAddrs, "-mpi-alladdr", "addresses of all of the processes as comma separated values")
-	flag.Var(&FlagInitTimeout, "-mpi-inittimeout", "duration to wait before timeout in init")
-	flag.StringVar(&FlagProtocol, "-mpi-protocol", "tcp", "communication protocol to use")
-	flag.StringVar(&FlagPassword, "-mpi-password", "", "value to use for salting the mpi connection")
-}
+//func init() {
+//	flag.StringVar(&FlagAddr, "mpi-addr", "", "address of the local running process")
+//	flag.Var(&FlagAllAddrs, "mpi-alladdr", "addresses of all of the processes as comma separated values")
+//	flag.Var(&FlagInitTimeout, "mpi-inittimeout", "duration to wait before timeout in init")
+//	flag.StringVar(&FlagProtocol, "mpi-protocol", "tcp", "communication protocol to use")
+//	flag.StringVar(&FlagPassword, "mpi-password", "", "value to use for salting the mpi connection")
+//}

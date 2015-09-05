@@ -74,7 +74,7 @@ func launch(execName string, ports []string, args []string) {
 			for _, v := range args {
 				a = append(a, v)
 			}
-			a = append(a, "--mpi-addr", port, "--mpi-alladdr", portlist)
+			a = append(a, "--addr", port, "--alladdr", portlist)
 			cmd := exec.Command(execName, a...)
 			cmd.Stdin = os.Stdin
 			cmd.Stdout = os.Stdout

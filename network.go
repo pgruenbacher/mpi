@@ -50,8 +50,8 @@ func (n *Network) Size() int {
 }
 
 // Init implements the Mpi init function
-func (n *Network) Init() error {
-	n.setFields()
+func (n *Network) Init(input Input) error {
+	n.setFields(input)
 	if len(n.Addrs) == 0 {
 		n.Addr = ":5000"
 		n.Addrs = []string{":5000"}
@@ -66,22 +66,22 @@ func (n *Network) Init() error {
 
 // setFields sets the fields of the network struct from flags if they were not
 // set with a value that was registered
-func (n *Network) setFields() {
+func (n *Network) setFields(input Input) {
 	if n.NetProto == "" {
-		n.NetProto = FlagProtocol
+		n.NetProto = input.FlagProtocol
 	}
 	if n.Password == "" {
-		n.Password = FlagPassword
+		n.Password = input.FlagPassword
 	}
 	if n.Timeout == 0 {
-		n.Timeout = time.Duration(FlagInitTimeout)
+		n.Timeout = time.Duration(input.FlagInitTimeout)
 	}
 	if n.Addr == "" {
-		n.Addr = FlagAddr
+		n.Addr = input.FlagAddr
 	}
 	if len(n.Addrs) == 0 {
-		n.Addrs = make([]string, len(FlagAllAddrs))
-		for i, str := range FlagAllAddrs {
+		n.Addrs = make([]string, len(input.FlagAllAddrs))
+		for i, str := range input.FlagAllAddrs {
 			n.Addrs[i] = str
 		}
 	}
